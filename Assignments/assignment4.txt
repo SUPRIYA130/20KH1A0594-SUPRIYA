@@ -1,0 +1,81 @@
+
+Creating a Database Using MongoDB and Mongosh
+
+
+Name	: Satyala Supriya
+
+Email	: satyalasupriya51@gmail.com
+
+Roll NO	: 20KH1A0594 (CSE)
+
+College Name : Sri Venkateswara College of Engineering, Kadapa
+
+
+
+
+Step 1: Create a new MongoDB database called myDatabase
+
+	use myDatabase
+
+Step 2: Create a collection named users within the myDatabase database
+	
+	db.createCollection("users")
+
+ Step 3: Insert at least three documents into the users collection
+	
+	db.users.insertMany([
+    		{ name: "Alice", email: "alice@example.com", age: 25 },  // Alice's document
+    		{ name: "Bob", email: "bob@example.com", age: 30 },  // Bob's document
+    		{ name: "Charlie", email: "charlie@example.com", age: 35 }  // Charlie's document
+		])
+
+ Step 4: Retrieve all users from the users collection
+
+	db.users.find()
+
+	output:
+
+	{ "_id": ObjectId("..."), "name": "Alice", "email": "alice@example.com", "age": 25 }
+	{ "_id": ObjectId("..."), "name": "Bob", "email": "bob@example.com", "age": 30 }
+	{ "_id": ObjectId("..."), "name": "Charlie", "email": "charlie@example.com", "age": 35 }
+
+
+ Step 5: Retrieve users with an age greater than or equal to 30
+
+	db.users.find({ age: { $gte: 30 } })
+
+ 
+	output:
+
+		{ "_id": ObjectId("..."), "name": "Bob", "email": "bob@example.com", "age": 30 }
+ 		{ "_id": ObjectId("..."), "name": "Charlie", "email": "charlie@example.com", "age": 35 }
+	
+
+Step 6: Update the age of a user with a specific email address
+
+db.users.updateOne(
+    { email: "bob@example.com" },  // Find Bob's document
+    { $set: { age: 31 } }  // Update Bob's age to 31
+)
+
+	output:
+		{ "acknowledged": true, "matchedCount": 1, "modifiedCount": 1 }
+
+
+Step 7: Delete a user document based on a specific email address
+	
+	db.users.deleteOne({ email: "alice@example.com" })  // Delete Alice's document
+
+	 output:
+	
+	{ "acknowledged": true, "deletedCount": 1 }
+
+
+Step 8: Create an index on the email field of the users collection
+
+	db.users.createIndex({ email: 1 })
+
+ 	output:
+	
+	Creates an index on the email field of the users collection
+
